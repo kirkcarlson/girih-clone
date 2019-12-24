@@ -226,24 +226,37 @@ IKRS.GirihCanvasHandler.prototype.keyDownHandler = function( e ) {
     // t=84
     // e=69
     // window.alert( e.keyCode );
+/* kirk
+ add bs to delete tile 8
 
-    if( e.keyCode == 39 || e.keyCode == 68 ) {
+the following are harder to do, because there is no static mapping of index to polygon type
+ add 0 to select decagon 48  ...t conflicts with texture, d conflicts with right D
+ add p,5 to select pentagon 80, 53
+ add h,6 to select hexagon 72, 54
+ add r,4 to select rhombus 82, 52
+ add b,3 to select bowtie 66, 51
+
+can repeats of the above cycle through variations of the shape?
+  again.. this is hard without a static mapping of indices to polygon type.
+*/
+
+    if( e.keyCode == 39 || e.keyCode == 68 ) { //right, d
 	this.girihCanvasHandler.adjacentTileOptionPointer++;
 	this.girihCanvasHandler.redraw();
-    } else if( e.keyCode == 37 || e.keyCode == 65) {
+    } else if( e.keyCode == 37 || e.keyCode == 65) { //left, a
 	this.girihCanvasHandler.adjacentTileOptionPointer--;
 	this.girihCanvasHandler.redraw();
-    } else if( e.keyCode == 13 || e.keyCode == 32 ) {
+    } else if( e.keyCode == 13 || e.keyCode == 32 ) { //enter, space
 	this.girihCanvasHandler._performAddCurrentAdjacentPresetTile();
-    } else if( e.keyCode == 46 ) {
+    } else if( e.keyCode == 46 || e.keyCode == 8 ) { // delete, backspace
 	this.girihCanvasHandler._performDeleteSelectedTile();
-    } else if( e.keyCode == 79 ) {
+    } else if( e.keyCode == 79 ) { //o
 	this.girihCanvasHandler.drawProperties.drawOutlines = !this.girihCanvasHandler.drawProperties.drawOutlines;
 	this.girihCanvasHandler.redraw();
-    } else if( e.keyCode == 84 ) {
+    } else if( e.keyCode == 84 ) { //t
 	this.girihCanvasHandler.drawProperties.drawTextures = !this.girihCanvasHandler.drawProperties.drawTextures;
 	this.girihCanvasHandler.redraw();
-    } else if( e.keyCode == 69 ) {
+    } else if( e.keyCode == 69 ) { //e
 	this.girihCanvasHandler._exportSVG();
     }
   
@@ -1029,6 +1042,11 @@ IKRS.GirihCanvasHandler.prototype.getSVG = function( options,
     if( typeof options.indent == "undefined" )
 	options.indent = "";
 
+/* kirk
+this doesn't look right..
+width and height should be determined by the high and low water marks of the
+actual drawing, not just what is on the screen
+*/
     options.width  = this.canvasWidth;
     options.height = this.canvasHeight;
     polygonStyle = "fill-opacity:0.0; fill:white; stroke:green; stroke-width:1;";
