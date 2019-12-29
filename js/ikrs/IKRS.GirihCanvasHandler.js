@@ -1046,6 +1046,9 @@ IKRS.GirihCanvasHandler.prototype.getSVG = function( options,
 this doesn't look right..
 width and height should be determined by the high and low water marks of the
 actual drawing, not just what is on the screen
+
+for now the options.width and options.height are ignored
+the polygonStyle is put into a svg style sheet rather than individual polygons
 */
     options.width  = this.canvasWidth;
     options.height = this.canvasHeight;

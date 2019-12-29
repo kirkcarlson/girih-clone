@@ -125,18 +125,18 @@ IKRS.Tile.Pentagon.prototype._buildOuterPolygons = function() {
 
 // This is totally shitty. Why object inheritance when I still
 // have to inherit object methods manually??!
-IKRS.Tile.Pentagon.prototype.computeBounds         = IKRS.Tile.prototype.computeBounds;
-IKRS.Tile.Pentagon.prototype._addVertex            = IKRS.Tile.prototype._addVertex;
-IKRS.Tile.Pentagon.prototype._translateVertex      = IKRS.Tile.prototype._translateVertex;
-IKRS.Tile.Pentagon.prototype._polygonToSVG         = IKRS.Tile.prototype._polygonToSVG;
-IKRS.Tile.Pentagon.prototype.getInnerTilePolygonAt = IKRS.Tile.prototype.getInnerTilePolygonAt;
-IKRS.Tile.Pentagon.prototype.getOuterTilePolygonAt = IKRS.Tile.prototype.getOuterTilePolygonAt;
-IKRS.Tile.Pentagon.prototype.getTranslatedVertex   = IKRS.Tile.prototype.getTranslatedVertex;
-IKRS.Tile.Pentagon.prototype.containsPoint         = IKRS.Tile.prototype.containsPoint;
-IKRS.Tile.Pentagon.prototype.locateEdgeAtPoint     = IKRS.Tile.prototype.locateEdgeAtPoint;
-IKRS.Tile.Pentagon.prototype.locateAdjacentEdge    = IKRS.Tile.prototype.locateAdjacentEdge;
-IKRS.Tile.Pentagon.prototype.getVertexAt           = IKRS.Tile.prototype.getVertexAt;
-IKRS.Tile.Pentagon.prototype.toSVG                 = IKRS.Tile.prototype.toSVG;
+IKRS.Tile.Pentagon.prototype.computeBounds           = IKRS.Tile.prototype.computeBounds;
+IKRS.Tile.Pentagon.prototype._addVertex              = IKRS.Tile.prototype._addVertex;
+IKRS.Tile.Pentagon.prototype._translateVertex        = IKRS.Tile.prototype._translateVertex;
+IKRS.Tile.Pentagon.prototype._polygonToSVG           = IKRS.Tile.prototype._polygonToSVG;
+IKRS.Tile.Pentagon.prototype.getInnerTilePolygonAt   = IKRS.Tile.prototype.getInnerTilePolygonAt;
+IKRS.Tile.Pentagon.prototype.getOuterTilePolygonAt   = IKRS.Tile.prototype.getOuterTilePolygonAt;
+IKRS.Tile.Pentagon.prototype.getTranslatedVertex     = IKRS.Tile.prototype.getTranslatedVertex;
+IKRS.Tile.Pentagon.prototype.containsPoint           = IKRS.Tile.prototype.containsPoint;
+IKRS.Tile.Pentagon.prototype.locateEdgeAtPoint       = IKRS.Tile.prototype.locateEdgeAtPoint;
+IKRS.Tile.Pentagon.prototype.locateAdjacentEdge      = IKRS.Tile.prototype.locateAdjacentEdge;
+IKRS.Tile.Pentagon.prototype.getVertexAt             = IKRS.Tile.prototype.getVertexAt;
+IKRS.Tile.Pentagon.prototype.toSVG                   = IKRS.Tile.prototype.toSVG;
 
-IKRS.Tile.Pentagon.prototype.constructor           = IKRS.Tile.Pentagon;
+IKRS.Tile.Pentagon.prototype.constructor             = IKRS.Tile.Pentagon;
 

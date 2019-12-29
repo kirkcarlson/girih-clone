@@ -207,18 +207,18 @@ IKRS.Tile.IrregularHexagon.prototype._buildOuterPolygons = function() {
 
 // This is totally shitty. Why object inheritance when I still
 // have to inherit object methods manually??!
-IKRS.Tile.IrregularHexagon.prototype.computeBounds         = IKRS.Tile.prototype.computeBounds;
-IKRS.Tile.IrregularHexagon.prototype._addVertex            = IKRS.Tile.prototype._addVertex;
-IKRS.Tile.IrregularHexagon.prototype._translateVertex      = IKRS.Tile.prototype._translateVertex;
-IKRS.Tile.IrregularHexagon.prototype._polygonToSVG         = IKRS.Tile.prototype._polygonToSVG;
-IKRS.Tile.IrregularHexagon.prototype.getInnerTilePolygonAt = IKRS.Tile.prototype.getInnerTilePolygonAt;
-IKRS.Tile.IrregularHexagon.prototype.getOuterTilePolygonAt = IKRS.Tile.prototype.getOuterTilePolygonAt;
-IKRS.Tile.IrregularHexagon.prototype.getTranslatedVertex   = IKRS.Tile.prototype.getTranslatedVertex;
-IKRS.Tile.IrregularHexagon.prototype.containsPoint         = IKRS.Tile.prototype.containsPoint;
-IKRS.Tile.IrregularHexagon.prototype.locateEdgeAtPoint     = IKRS.Tile.prototype.locateEdgeAtPoint;
-IKRS.Tile.IrregularHexagon.prototype.locateAdjacentEdge    = IKRS.Tile.prototype.locateAdjacentEdge;
-IKRS.Tile.IrregularHexagon.prototype.getVertexAt           = IKRS.Tile.prototype.getVertexAt;
-IKRS.Tile.IrregularHexagon.prototype.toSVG                 = IKRS.Tile.prototype.toSVG;
+IKRS.Tile.IrregularHexagon.prototype.computeBounds           = IKRS.Tile.prototype.computeBounds;
+IKRS.Tile.IrregularHexagon.prototype._addVertex              = IKRS.Tile.prototype._addVertex;
+IKRS.Tile.IrregularHexagon.prototype._translateVertex        = IKRS.Tile.prototype._translateVertex;
+IKRS.Tile.IrregularHexagon.prototype._polygonToSVG           = IKRS.Tile.prototype._polygonToSVG;
+IKRS.Tile.IrregularHexagon.prototype.getInnerTilePolygonAt   = IKRS.Tile.prototype.getInnerTilePolygonAt;
+IKRS.Tile.IrregularHexagon.prototype.getOuterTilePolygonAt   = IKRS.Tile.prototype.getOuterTilePolygonAt;
+IKRS.Tile.IrregularHexagon.prototype.getTranslatedVertex     = IKRS.Tile.prototype.getTranslatedVertex;
+IKRS.Tile.IrregularHexagon.prototype.containsPoint           = IKRS.Tile.prototype.containsPoint;
+IKRS.Tile.IrregularHexagon.prototype.locateEdgeAtPoint       = IKRS.Tile.prototype.locateEdgeAtPoint;
+IKRS.Tile.IrregularHexagon.prototype.locateAdjacentEdge      = IKRS.Tile.prototype.locateAdjacentEdge;
+IKRS.Tile.IrregularHexagon.prototype.getVertexAt             = IKRS.Tile.prototype.getVertexAt;
+IKRS.Tile.IrregularHexagon.prototype.toSVG                   = IKRS.Tile.prototype.toSVG;
 
-IKRS.Tile.IrregularHexagon.prototype.constructor           = IKRS.Tile.IrregularHexagon;
+IKRS.Tile.IrregularHexagon.prototype.constructor             = IKRS.Tile.IrregularHexagon;
 

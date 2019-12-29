@@ -228,7 +228,8 @@ IKRS.Tile.prototype.locateAdjacentEdge = function( pointA,
 
 IKRS.Tile.prototype.toSVG = function( options,
 				      polygonStyle,
-				      buffer
+				      buffer,
+				      boundingBox
 				    ) {
     
     var returnBuffer = false;
@@ -248,9 +249,10 @@ IKRS.Tile.prototype.toSVG = function( options,
 	this._polygonToSVG( this.innerTilePolygons[i],
 			    options,
 			    polygonStyle,
-			    buffer );
+			    buffer,
+			    boundingBox);
     }
-    
+
     // Export outer tile polygons?
     /*
     for( var i = 0; i < this.outerTilePolygons.length; i++ ) {
@@ -271,7 +273,8 @@ IKRS.Tile.prototype.toSVG = function( options,
 IKRS.Tile.prototype._polygonToSVG = function( polygon,
 					      options,
 					      polygonStyle,
-					      buffer 
+					      buffer,
+					      boundingBox
 					      ) {
     if( typeof options != "undefined" && typeof options.indent != "undefined" )
 	buffer.push( options.indent );
@@ -285,24 +288,32 @@ IKRS.Tile.prototype._polygonToSVG = function( polygon,
 	buffer.push( vert.x );
 	buffer.push( "," );
 	buffer.push( vert.y );
-    }    
+
+        boundingBox.evaluatePoint( vert.x, vert.y) // important to use translated vertices
+    }
+
+
     buffer.push( "\"" );
-    
+
     if( typeof polygonStyle != "undefined" ) {
 	buffer.push( " style=\"" );
 	buffer.push( polygonStyle );
 	buffer.push( "\"" );
     }
-    
+
     buffer.push( " />\n" );
-};
+    return
+}
+
+
+
 
 IKRS.Tile.prototype.computeBounds = function() {
     return IKRS.BoundingBox2.computeFromPoints( this.polygon.vertices );
 };
 
 IKRS.Tile.prototype._translateVertex = function( vertex ) {
-    return vertex.clone().rotate( IKRS.Point2.ZERO_POINT, this.angle ).add( this.position );   
+    return vertex.clone().rotate( IKRS.Point2.ZERO_POINT, this.angle ).add( this.position );
 };
 
 IKRS.Tile.prototype._addVertex = function( vertex ) {
@@ -310,4 +321,3 @@ IKRS.Tile.prototype._addVertex = function( vertex ) {
 };
 
 IKRS.Tile.prototype.constructor = IKRS.Tile;
-

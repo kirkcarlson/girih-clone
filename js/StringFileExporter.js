@@ -14,6 +14,7 @@ function saveTextFile( stringData, filename, mimeType ) {
 	mimeType = "text/plain";
     
     var blob = new Blob([stringData], {type: mimeType});
+console.log( "saveTextFile filename:"+filename+" mime:"+mimeType)
     window.saveAs(blob, filename);
     
 }

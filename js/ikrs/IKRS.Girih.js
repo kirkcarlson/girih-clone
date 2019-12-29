@@ -277,7 +277,7 @@ for( var e = 2; e < 4; e++ ) {
 
 IKRS.Girih.TILE_ALIGN[ IKRS.Girih.TILE_TYPE_BOW_TIE ] = Array(6);
 IKRS.Girih.TILE_ALIGN[ IKRS.Girih.TILE_TYPE_BOW_TIE ][0] = [  
-    // The decagon 
+    // The pentagon has only one possible alignment on the edge (10 times the same)
     new IKRS.TileAlign( IKRS.Girih.TILE_TYPE_DECAGON, IKRS.Girih.DEFAULT_EDGE_LENGTH, new IKRS.Point2( 32, -99.5), 0*IKRS.Girih.MINIMAL_ANGLE ),
     // The pentagon has only one possible alignment on the edge (5 times the same)
     new IKRS.TileAlign( IKRS.Girih.TILE_TYPE_PENTAGON, IKRS.Girih.DEFAULT_EDGE_LENGTH, new IKRS.Point2( 32, -50.5), 2*IKRS.Girih.MINIMAL_ANGLE ),
@@ -297,7 +297,7 @@ IKRS.Girih.TILE_ALIGN[ IKRS.Girih.TILE_TYPE_BOW_TIE ][0] = [
     new IKRS.TileAlign( IKRS.Girih.TILE_TYPE_PENROSE_RHOMBUS, IKRS.Girih.DEFAULT_EDGE_LENGTH, new IKRS.Point2( 9, -28), 2*IKRS.Girih.MINIMAL_ANGLE )   
 ];
 IKRS.Girih.TILE_ALIGN[ IKRS.Girih.TILE_TYPE_BOW_TIE ][1] = [
-    // The decagon 
+    // The pentagon has only one possible alignment on the edge (10 times the same)
     new IKRS.TileAlign( IKRS.Girih.TILE_TYPE_DECAGON, IKRS.Girih.DEFAULT_EDGE_LENGTH, new IKRS.Point2( 136, 44.5), 0*IKRS.Girih.MINIMAL_ANGLE ),
     // The pentagon has only one possible alignment on the edge (5 times the same)
     new IKRS.TileAlign( IKRS.Girih.TILE_TYPE_PENTAGON, IKRS.Girih.DEFAULT_EDGE_LENGTH, new IKRS.Point2( 90, 29), 0*IKRS.Girih.MINIMAL_ANGLE ),
@@ -453,50 +453,97 @@ for( var t = 0; t < IKRS.Girih.TILE_ALIGN.length; t++ ) {
 */
 
 
+/* kirk
+new stuff to account for:
+  whatever.preamble.toSVG = function( options,
+  fontStyle ..."12pt bold Helvetica, sans-serif"
+*/
+
+// round is used to limit the number of digits included in the SVG output
+IKRS.Girih.round = function( n, digits) {
+    // round n to the digits number of digits right of decimal point
+    // n is the number to be rounded
+    // digits is the number of digits
+    if (digits === undefined) {
+      digits = 0
+    }
+    var magnitude = Math.pow( 10, digits)
+    return Math.round( n * magnitude) / magnitude
+}
+
+const svgPrecision = 3;
+const svgBackground = "";
+const fontStyle = "font:10pt normal Helvetica, Ariel, sans-serif;";
+
 IKRS.Girih.prototype.toSVG = function( options,
-				       polygonStyle,
-				       buffer
-				     ) {
-    
+                                       polygonStyle,
+                                       buffer
+                                     ) {
+
     var returnBuffer = false;
     if( typeof buffer == "undefined" || !buffer ) {
-	buffer = [];
-	returnBuffer = true;
+        buffer = [];
+        returnBuffer = true;
     }
 
-    if( typeof options != "undefined" && typeof options.indent != "undefined" )
-	buffer.push( options.indent );
-    
-    buffer.push( "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" );
-    buffer.push( "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n" );
-    
-    buffer.push( "<svg xmlns=\"http://www.w3.org/2000/svg\" \n" );
-    buffer.push( "     xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:ev=\"http://www.w3.org/2001/xml-events\" \n" );
-    buffer.push( "     version=\"1.1\" baseProfile=\"full\" \n" );
-    buffer.push( "     height=\"" );
-    buffer.push( options.height );
-    buffer.push( "\"" );
-    buffer.push( "     width=\"" );
-    buffer.push( options.width );
-    buffer.push( "\">\n" );
+    if (polygonStyle === undefined) {
+        polygonStyle = ""
+    }
+    if (fontStyle === undefined) {
+        fontStyle = "font:10pt normal Helvetica, Ariel, sans-serif;"
+    }
+    if (svgBackground != undefined && svgBackground !== "") {
+        var background = '<rect width="100%" height="100%" fill="' + svgBackground + '"/>';
+    } else {
+        var background = ""
+    }
+    var highWater = new IKRS.BoundingBox3()
+
     var oldIndent = options.indent;
     options.indent += "    ";
     for( var i = 0; i < this.tiles.length; i++ ) {
-	this.tiles[i].toSVG( options, polygonStyle, buffer );
-    }    
-    
+        var boundingBox = new IKRS.BoundingBox3()
+        this.tiles[i].toSVG( options, polygonStyle, buffer, boundingBox );
+
+        highWater.evaluatePoint(boundingBox)
+    }
+
     options.indent = oldIndent;
-    if( typeof options != "undefined" && typeof options.indent != "undefined" )
-	buffer.push( options.indent );
 
-    buffer.push( "</svg>\n" );
-    
-    if( returnBuffer )
-	return buffer;
-    else
-	return buffer.join( "" );
-};
 
+var preamble = `
+<svg id="girih-svg" xmlns="http://www.w3.org/2000/svg" version="1.1"
+    height="` + IKRS.Girih.round( highWater.getHeight(), svgPrecision) + `"
+    width="` + IKRS.Girih.round( highWater.getWidth(), svgPrecision) + `">
+<style>
+path {
+    fill:none;
+    vector-effect:non-scaling-stroke;
+}
+polygon {
+    ` + polygonStyle + `
+}
+text {
+    fill:black;
+    ` + fontStyle + `
+}
+</style>
+
+<g transform="matrix(1 0 0 1 ` +
+    IKRS.Girih.round( -highWater.getXMin(), svgPrecision) + ` ` +
+    IKRS.Girih.round( -highWater.getYMin(), svgPrecision) + `)">
+`
+trailer = `
+</g>
+<script>
+/* for any runtime JavaScript to control or animate the girih */
+/* This must be at the end of the file to execute after the girih DOM is built*/
+</script>
+</svg>
+`
+    buffer.unshift( preamble)
+    buffer.push( trailer)
+    return buffer
+}
 
 IKRS.Girih.prototype.constructor = IKRS.Girih;
-

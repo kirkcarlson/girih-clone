@@ -167,18 +167,19 @@ IKRS.Tile.PenroseRhombus.prototype.getCenterPolygonIndex = function() {
 
 // This is totally shitty. Why object inheritance when I still
 // have to inherit object methods manually??!
-IKRS.Tile.PenroseRhombus.prototype.computeBounds         = IKRS.Tile.prototype.computeBounds;
-IKRS.Tile.PenroseRhombus.prototype._addVertex            = IKRS.Tile.prototype._addVertex;
-IKRS.Tile.PenroseRhombus.prototype._translateVertex      = IKRS.Tile.prototype._translateVertex;
-IKRS.Tile.PenroseRhombus.prototype._polygonToSVG         = IKRS.Tile.prototype._polygonToSVG;
-IKRS.Tile.PenroseRhombus.prototype.getInnerTilePolygonAt = IKRS.Tile.prototype.getInnerTilePolygonAt;
-IKRS.Tile.PenroseRhombus.prototype.getOuterTilePolygonAt = IKRS.Tile.prototype.getOuterTilePolygonAt;
-IKRS.Tile.PenroseRhombus.prototype.getTranslatedVertex   = IKRS.Tile.prototype.getTranslatedVertex;
-IKRS.Tile.PenroseRhombus.prototype.containsPoint         = IKRS.Tile.prototype.containsPoint;
-IKRS.Tile.PenroseRhombus.prototype.locateEdgeAtPoint     = IKRS.Tile.prototype.locateEdgeAtPoint;
-IKRS.Tile.PenroseRhombus.prototype.locateAdjacentEdge    = IKRS.Tile.prototype.locateAdjacentEdge;
-IKRS.Tile.PenroseRhombus.prototype.getVertexAt           = IKRS.Tile.prototype.getVertexAt;
-IKRS.Tile.PenroseRhombus.prototype.toSVG                 = IKRS.Tile.prototype.toSVG;
+IKRS.Tile.PenroseRhombus.prototype.evaluatePoint           = IKRS.Tile.prototype.evaluatePoint; //kirk
+IKRS.Tile.PenroseRhombus.prototype.computeBounds           = IKRS.Tile.prototype.computeBounds;
+IKRS.Tile.PenroseRhombus.prototype._addVertex              = IKRS.Tile.prototype._addVertex;
+IKRS.Tile.PenroseRhombus.prototype._translateVertex        = IKRS.Tile.prototype._translateVertex;
+IKRS.Tile.PenroseRhombus.prototype._polygonToSVG           = IKRS.Tile.prototype._polygonToSVG;
+IKRS.Tile.PenroseRhombus.prototype.getInnerTilePolygonAt   = IKRS.Tile.prototype.getInnerTilePolygonAt;
+IKRS.Tile.PenroseRhombus.prototype.getOuterTilePolygonAt   = IKRS.Tile.prototype.getOuterTilePolygonAt;
+IKRS.Tile.PenroseRhombus.prototype.getTranslatedVertex     = IKRS.Tile.prototype.getTranslatedVertex;
+IKRS.Tile.PenroseRhombus.prototype.containsPoint           = IKRS.Tile.prototype.containsPoint;
+IKRS.Tile.PenroseRhombus.prototype.locateEdgeAtPoint       = IKRS.Tile.prototype.locateEdgeAtPoint;
+IKRS.Tile.PenroseRhombus.prototype.locateAdjacentEdge      = IKRS.Tile.prototype.locateAdjacentEdge;
+IKRS.Tile.PenroseRhombus.prototype.getVertexAt             = IKRS.Tile.prototype.getVertexAt;
+IKRS.Tile.PenroseRhombus.prototype.toSVG                   = IKRS.Tile.prototype.toSVG;
 
-IKRS.Tile.Rhombus.prototype.constructor                  = IKRS.Tile.Rhombus;
+IKRS.Tile.Rhombus.prototype.constructor                    = IKRS.Tile.Rhombus;
 

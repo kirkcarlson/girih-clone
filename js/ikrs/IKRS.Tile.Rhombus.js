@@ -135,18 +135,17 @@ IKRS.Tile.Rhombus.prototype._buildOuterPolygons = function() {
 
 // This is totally shitty. Why object inheritance when I still
 // have to inherit object methods manually??!
-IKRS.Tile.Rhombus.prototype.computeBounds         = IKRS.Tile.prototype.computeBounds;
-IKRS.Tile.Rhombus.prototype._addVertex            = IKRS.Tile.prototype._addVertex;
-IKRS.Tile.Rhombus.prototype._translateVertex      = IKRS.Tile.prototype._translateVertex;
-IKRS.Tile.Rhombus.prototype._polygonToSVG         = IKRS.Tile.prototype._polygonToSVG;
-IKRS.Tile.Rhombus.prototype.getInnerTilePolygonAt = IKRS.Tile.prototype.getInnerTilePolygonAt;
-IKRS.Tile.Rhombus.prototype.getOuterTilePolygonAt = IKRS.Tile.prototype.getOuterTilePolygonAt;
-IKRS.Tile.Rhombus.prototype.getTranslatedVertex   = IKRS.Tile.prototype.getTranslatedVertex;
-IKRS.Tile.Rhombus.prototype.containsPoint         = IKRS.Tile.prototype.containsPoint;
-IKRS.Tile.Rhombus.prototype.locateEdgeAtPoint     = IKRS.Tile.prototype.locateEdgeAtPoint;
-IKRS.Tile.Rhombus.prototype.locateAdjacentEdge    = IKRS.Tile.prototype.locateAdjacentEdge;
-IKRS.Tile.Rhombus.prototype.getVertexAt           = IKRS.Tile.prototype.getVertexAt;
-IKRS.Tile.Rhombus.prototype.toSVG                 = IKRS.Tile.prototype.toSVG;
+IKRS.Tile.Rhombus.prototype.computeBounds           = IKRS.Tile.prototype.computeBounds;
+IKRS.Tile.Rhombus.prototype._addVertex              = IKRS.Tile.prototype._addVertex;
+IKRS.Tile.Rhombus.prototype._translateVertex        = IKRS.Tile.prototype._translateVertex;
+IKRS.Tile.Rhombus.prototype._polygonToSVG           = IKRS.Tile.prototype._polygonToSVG;
+IKRS.Tile.Rhombus.prototype.getInnerTilePolygonAt   = IKRS.Tile.prototype.getInnerTilePolygonAt;
+IKRS.Tile.Rhombus.prototype.getOuterTilePolygonAt   = IKRS.Tile.prototype.getOuterTilePolygonAt;
+IKRS.Tile.Rhombus.prototype.getTranslatedVertex     = IKRS.Tile.prototype.getTranslatedVertex;
+IKRS.Tile.Rhombus.prototype.containsPoint           = IKRS.Tile.prototype.containsPoint;
+IKRS.Tile.Rhombus.prototype.locateEdgeAtPoint       = IKRS.Tile.prototype.locateEdgeAtPoint;
+IKRS.Tile.Rhombus.prototype.locateAdjacentEdge      = IKRS.Tile.prototype.locateAdjacentEdge;
+IKRS.Tile.Rhombus.prototype.getVertexAt             = IKRS.Tile.prototype.getVertexAt;
+IKRS.Tile.Rhombus.prototype.toSVG                   = IKRS.Tile.prototype.toSVG;
 
-IKRS.Tile.Rhombus.prototype.constructor           = IKRS.Tile.Rhombus;
-
+IKRS.Tile.Rhombus.prototype.constructor             = IKRS.Tile.Rhombus;

@@ -105,18 +105,17 @@ IKRS.Tile.Decagon.prototype._buildOuterPolygons = function( edgeLength ) {
 
 // This is totally shitty. Why object inheritance when I still
 // have to inherit object methods manually??!
-IKRS.Tile.Decagon.prototype.computeBounds         = IKRS.Tile.prototype.computeBounds;
-IKRS.Tile.Decagon.prototype._addVertex            = IKRS.Tile.prototype._addVertex;
-IKRS.Tile.Decagon.prototype._translateVertex      = IKRS.Tile.prototype._translateVertex;
-IKRS.Tile.Decagon.prototype._polygonToSVG         = IKRS.Tile.prototype._polygonToSVG;
-IKRS.Tile.Decagon.prototype.getInnerTilePolygonAt = IKRS.Tile.prototype.getInnerTilePolygonAt;
-IKRS.Tile.Decagon.prototype.getOuterTilePolygonAt = IKRS.Tile.prototype.getOuterTilePolygonAt;
-IKRS.Tile.Decagon.prototype.getTranslatedVertex   = IKRS.Tile.prototype.getTranslatedVertex;
-IKRS.Tile.Decagon.prototype.containsPoint         = IKRS.Tile.prototype.containsPoint;
-IKRS.Tile.Decagon.prototype.locateEdgeAtPoint     = IKRS.Tile.prototype.locateEdgeAtPoint;
-IKRS.Tile.Decagon.prototype.locateAdjacentEdge    = IKRS.Tile.prototype.locateAdjacentEdge;
-IKRS.Tile.Decagon.prototype.getVertexAt           = IKRS.Tile.prototype.getVertexAt;
-IKRS.Tile.Decagon.prototype.toSVG                 = IKRS.Tile.prototype.toSVG;
+IKRS.Tile.Decagon.prototype.computeBounds           = IKRS.Tile.prototype.computeBounds;
+IKRS.Tile.Decagon.prototype._addVertex              = IKRS.Tile.prototype._addVertex;
+IKRS.Tile.Decagon.prototype._translateVertex        = IKRS.Tile.prototype._translateVertex;
+IKRS.Tile.Decagon.prototype._polygonToSVG           = IKRS.Tile.prototype._polygonToSVG;
+IKRS.Tile.Decagon.prototype.getInnerTilePolygonAt   = IKRS.Tile.prototype.getInnerTilePolygonAt;
+IKRS.Tile.Decagon.prototype.getOuterTilePolygonAt   = IKRS.Tile.prototype.getOuterTilePolygonAt;
+IKRS.Tile.Decagon.prototype.getTranslatedVertex     = IKRS.Tile.prototype.getTranslatedVertex;
+IKRS.Tile.Decagon.prototype.containsPoint           = IKRS.Tile.prototype.containsPoint;
+IKRS.Tile.Decagon.prototype.locateEdgeAtPoint       = IKRS.Tile.prototype.locateEdgeAtPoint;
+IKRS.Tile.Decagon.prototype.locateAdjacentEdge      = IKRS.Tile.prototype.locateAdjacentEdge;
+IKRS.Tile.Decagon.prototype.getVertexAt             = IKRS.Tile.prototype.getVertexAt;
+IKRS.Tile.Decagon.prototype.toSVG                   = IKRS.Tile.prototype.toSVG;
 
-IKRS.Tile.Decagon.prototype.constructor           = IKRS.Tile.Decagon;
-
+IKRS.Tile.Decagon.prototype.constructor             = IKRS.Tile.Decagon;

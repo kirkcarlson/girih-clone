@@ -131,18 +131,18 @@ IKRS.Tile.BowTie.prototype._buildOuterPolygons = function() {
 
 // This is totally shitty. Why object inheritance when I still
 // have to inherit object methods manually??!
-IKRS.Tile.BowTie.prototype.computeBounds         = IKRS.Tile.prototype.computeBounds;
-IKRS.Tile.BowTie.prototype._addVertex            = IKRS.Tile.prototype._addVertex;
-IKRS.Tile.BowTie.prototype._translateVertex      = IKRS.Tile.prototype._translateVertex;
-IKRS.Tile.BowTie.prototype._polygonToSVG         = IKRS.Tile.prototype._polygonToSVG;
-IKRS.Tile.BowTie.prototype.getInnerTilePolygonAt = IKRS.Tile.prototype.getInnerTilePolygonAt;
-IKRS.Tile.BowTie.prototype.getOuterTilePolygonAt = IKRS.Tile.prototype.getOuterTilePolygonAt;
-IKRS.Tile.BowTie.prototype.getTranslatedVertex   = IKRS.Tile.prototype.getTranslatedVertex;
-IKRS.Tile.BowTie.prototype.containsPoint         = IKRS.Tile.prototype.containsPoint;
-IKRS.Tile.BowTie.prototype.locateEdgeAtPoint     = IKRS.Tile.prototype.locateEdgeAtPoint;
-IKRS.Tile.BowTie.prototype.locateAdjacentEdge    = IKRS.Tile.prototype.locateAdjacentEdge;
-IKRS.Tile.BowTie.prototype.getVertexAt           = IKRS.Tile.prototype.getVertexAt;
-IKRS.Tile.BowTie.prototype.toSVG                 = IKRS.Tile.prototype.toSVG;
+IKRS.Tile.BowTie.prototype.computeBounds           = IKRS.Tile.prototype.computeBounds;
+IKRS.Tile.BowTie.prototype._addVertex              = IKRS.Tile.prototype._addVertex;
+IKRS.Tile.BowTie.prototype._translateVertex        = IKRS.Tile.prototype._translateVertex;
+IKRS.Tile.BowTie.prototype._polygonToSVG           = IKRS.Tile.prototype._polygonToSVG;
+IKRS.Tile.BowTie.prototype.getInnerTilePolygonAt   = IKRS.Tile.prototype.getInnerTilePolygonAt;
+IKRS.Tile.BowTie.prototype.getOuterTilePolygonAt   = IKRS.Tile.prototype.getOuterTilePolygonAt;
+IKRS.Tile.BowTie.prototype.getTranslatedVertex     = IKRS.Tile.prototype.getTranslatedVertex;
+IKRS.Tile.BowTie.prototype.containsPoint           = IKRS.Tile.prototype.containsPoint;
+IKRS.Tile.BowTie.prototype.locateEdgeAtPoint       = IKRS.Tile.prototype.locateEdgeAtPoint;
+IKRS.Tile.BowTie.prototype.locateAdjacentEdge      = IKRS.Tile.prototype.locateAdjacentEdge;
+IKRS.Tile.BowTie.prototype.getVertexAt             = IKRS.Tile.prototype.getVertexAt;
+IKRS.Tile.BowTie.prototype.toSVG                   = IKRS.Tile.prototype.toSVG;
 
-IKRS.Tile.BowTie.prototype.constructor           = IKRS.Tile.BowTie;
+IKRS.Tile.BowTie.prototype.constructor             = IKRS.Tile.BowTie;
 
