@@ -2,45 +2,46 @@
         "http://www.w3.org/TR/html4/strict.dtd"> 
 <html>
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>Girih</title>
-  <script src="js/ikrs/IKRS.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Object.js" type="text/javascript"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Girih</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
 
-  <script src="js/ikrs/IKRS.Pair.js" type="text/javascript"></script>
-  
 
-  <script src="js/ikrs/IKRS.TileAlign.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Point2.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Line2.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Polygon.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Circle.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.BoundingBox2.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.BoundingBox3.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Tile.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Tile.Decagon.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Tile.Pentagon.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Tile.IrregularHexagon.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Tile.Rhombus.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Tile.BowTie.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Tile.PenroseRhombus.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Tile.Octagon.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.Girih.js" type="text/javascript"></script>
-  <script src="js/ikrs/IKRS.GirihCanvasHandler.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Object.js" type="text/javascript"></script>
 
-  <script src="js/thirdparty/FileSaver.js" language="Javascript" type="text/javascript"></script>
-  <script src="js/StringFileExporter.js" language="Javascript" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Pair.js" type="text/javascript"></script>
 
-  <script src="js/ImageFileReader.js" type="text/javascript"></script>
-  
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <script src="js/ikrs/IKRS.TileAlign.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Point2.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Line2.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Polygon.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Circle.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.BoundingBox2.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.BoundingBox3.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Tile.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Tile.Decagon.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Tile.Pentagon.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Tile.IrregularHexagon.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Tile.Rhombus.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Tile.BowTie.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Tile.PenroseRhombus.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Tile.Octagon.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Girih.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.GirihCanvasHandler.js" type="text/javascript"></script>
+
+    <script src="js/thirdparty/FileSaver.js" language="Javascript" type="text/javascript"></script>
+    <script src="js/StringFileExporter.js" language="Javascript" type="text/javascript"></script>
+
+    <script src="js/ImageFileReader.js" type="text/javascript"></script>
 </head>
 
 <body>
-<script language="Javascript" src="js/main.js"></script>
-<p>
-<canvas id="girih_canvas" width="1024" height="768" class="tooltip" title="Hover over existing tiles to see possible adjacent tiles.
+    <script src="js/main.js"language="Javascript" type="text/javascript"></script>
+<div id="container">
+  <!-- changing canvas size affects polygon proportions... -->
+  <canvas id="girih_canvas"  width="1024" height="768" class="tooltip" title="Hover over existing tiles to see possible adjacent tiles.
 
 Press [a] or [d] to navigate through the tile set.
 
@@ -51,91 +52,76 @@ Press [o] to toggle the outlines on/off.
 Press [t] to toggle the textures on/off.
 
 Press [e] to save an image file."></canvas>
-<br/>
+  <br/>
 
-<form name="rotation_form">
-  Rotate selected tile:
-  <button onclick="rotateLeft(); return false;" style="font-family: Arial; font-size: 1.2em;">&#x27f2;</button>
-  <button onclick="rotateRight(); return false;" style="font-family: Arial; font-size: 1.2em;">&#x27f3;</button>
-  <input type="checkbox" name="rotate_all" checked="checked" /> Rotate all
-</form>
-<br/>
+  <div id="controlPane">
+    <form name="girih_form">
+      [Main Settings]<br/>
+      <input type="checkbox" name="draw_boxes" onclick="redrawGirih()" /> Draw Boxes<br/>
+      <input type="checkbox" name="draw_outlines" onclick="redrawGirih()" checked="checked" /> Draw Outlines</br>
+      <input type="checkbox" name="draw_textures" onclick="redrawGirih()" checked="checked" /> Draw Textures</br>
+      <input type="checkbox" name="draw_inner_polygons" onclick="redrawGirih();" checked="checked" /> Draw Inner Polygons</br>
+      <br/>
+      <input type="checkbox" name="allow_penrose_tile" onclick="redrawGirih()" checked="checked" /> Allow Penrose Tile</br>
+      <!--
+      <span style="margin-left: 15px;"><input type="checkbox" name="draw_penrose_center_polygon" id="draw_penrose_center_polygon" onclick="redrawGirih();" checked="checked" /> Draw center penrose polygon</span><br/>
+      -->
+      <br/>
+      <br/>
+      [Texture Settings]<br/>
+      <input type="radio" name="texture_type" id="texture_type_default" onclick="document.getElementById('custom_texture_file').disabled = this.checked; if( this.checked ) { girihCanvasHandler.setTextureImage( defaultTextureImage, true ); }" value="default" checked="checked" /> Default Background<br/>
+      <input type="radio" name="texture_type" id="texture_type_custom" onclick="document.getElementById('custom_texture_file').disabled = !this.checked; document.getElementById('custom_texture_file').click();" value="custom" /> Custom:<br/>
+      <span style="margin-left: 32px;"><input type="file" name="custom_texture_file" id="custom_texture_file" onchange="ImageFileReader.readTextureImage();" /></span>
+      <br/>
+      <br/>
+      <br/>
+      [Development Settings]<br/>
+      <input type="checkbox" name="outer_random_color_fill" onclick="redrawGirih();" /> Random Color Fill (outer sub polygons)</br>
+      <input type="checkbox" name="inner_random_color_fill" onclick="redrawGirih();" /> Random Color Fill (inner sub polygons)</br>
+      <br/>
+      <br/>
+    </form>
 
-<div style="position: absolute; left: 1044px; top: 588px;">
-<!--
-<button onclick="decreaseZoom()">zoom(-)</button>
-<button onclick="increaseZoom()">zoom(+)</button>
--->
-<br/>
-<table border="0">
-<tr>
-  <td><button onclick="decreaseZoom()">zoom(-)</button></td>
-  <td></td>
-  <td><button onclick="increaseZoom()">zoom(+)</button></td>
-</tr>
-<tr>
-  <td></td>
-  <td align="center"><button onclick="moveUp()" style="font-size: 1.2em;">&uarr;</button></td>
-  <td></td>
-</tr>
-<tr>
-  <td align="right"><button onclick="moveLeft()" style="font-size: 1.2em;">&larr;</button></td>
-  <td></td>
-  <td><button onclick="moveRight()" style="font-size: 1.2em;">&rarr;</button></td>
-</tr>
-<tr>
-  <td></td>
-  <td><button onclick="moveDown()" style="font-size: 1.2em;">&darr;</button></td>
-  <td></td>
-</tr>
-</table>
+    <br/>
+    <br/>
+    [pan]
+    <div id="directionKeys">
+      <button id="upKey" onclick="moveUp()";">&uarr;</button>
+      <button id="downKey" onclick="moveDown()";">&darr;</button>
+      <button id="rightKey" onclick="moveRight()";">&rarr;</button>
+      <button id="leftKey" onclick="moveLeft()";">&larr;</button>
+    </div>
+    <br/>
+    [rotate]
+    <div id="rotationKeys">
+      <form name="rotation_form">
+        Rotate selected tile:
+        <button id="rotateLeftKey" onclick="rotateLeft();return false;">&#x27f2;</button>
+        <button id="rotateRightKey" onclick="rotateRight();return false;">&#x27f3;</button>
+        <br/>
+        <input id="rotateAll" type="checkbox" name="rotate_all" checked="checked" /> Rotate all
+      </form>
+    </div>
+    <br/>
+    [zoom]
+    <div id="zoomKeys">
+      <button id="zoomInKey" onclick="increaseZoom();">+Zoom</button>
+      <button id="zoomOutKey" onclick="decreaseZoom();">-Zoom</button>
+    </div>
+    <br/>
+    [Tools]<br/>
+      <button onclick="exportSVG();">Export SVG</button><br/>
+      <input type="text" id="downloadFilename" placeholder="girih">
+    <br/>
+    <br/>
+    [Debug]<br/>
+      <textarea id="debug" rows="5" cols="30"></textarea>
+      <script>
+        function DEBUG( msg ) {
+           this.document.getElementById("debug").innerHTML = msg;
+        }
+      </script>
+  </div>
 </div>
-
- 
-<br/>
-<div id="debug"></div>
-<script>
-  function DEBUG( msg ) {
-     this.document.getElementById("debug").innerHTML = msg;
-  }
-</script>
-
-<br/>
-
-<div style="position: absolute; left: 1044px; top: 10px;">
-  <form name="girih_form">
-    [Main Settings]<br/>
-    <input type="checkbox" name="draw_boxes" onclick="redrawGirih()" /> Draw Boxes<br/>
-    <input type="checkbox" name="draw_outlines" onclick="redrawGirih()" checked="checked" /> Draw Outlines</br>
-    <input type="checkbox" name="draw_textures" onclick="redrawGirih()" checked="checked" /> Draw Textures</br>
-    <input type="checkbox" name="draw_inner_polygons" onclick="redrawGirih();" checked="checked" /> Draw Inner Polygons</br>
-    <br/>
-    <input type="checkbox" name="allow_penrose_tile" onclick="redrawGirih()" checked="checked" /> Allow Penrose Tile</br>
-    <!--
-    <span style="margin-left: 15px;"><input type="checkbox" name="draw_penrose_center_polygon" id="draw_penrose_center_polygon" onclick="redrawGirih();" checked="checked" /> Draw center penrose polygon</span><br/>
-    -->
-    <br/>
-    <br/>
-    [Texture Settings]<br/>
-    <input type="radio" name="texture_type" id="texture_type_default" onclick="document.getElementById('custom_texture_file').disabled = this.checked; if( this.checked ) { girihCanvasHandler.setTextureImage( defaultTextureImage, true ); }" value="default" checked="checked" /> Default Background<br/>
-    <input type="radio" name="texture_type" id="texture_type_custom" onclick="document.getElementById('custom_texture_file').disabled = !this.checked; document.getElementById('custom_texture_file').click();" value="custom" /> Custom:<br/>
-    <span style="margin-left: 32px;"><input type="file" name="custom_texture_file" id="custom_texture_file" onchange="ImageFileReader.readTextureImage();" /></span>
-    <br/>
-    <br/>
-    <br/>
-    [Development Settings]<br/>
-    <input type="checkbox" name="outer_random_color_fill" onclick="redrawGirih();" /> Random Color Fill (outer sub polygons)</br>
-    <input type="checkbox" name="inner_random_color_fill" onclick="redrawGirih();" /> Random Color Fill (inner sub polygons)</br>
-    <br/>
-    <br/>
-  </form>
-
-  [Tools]<br/>
-    <button onclick="exportSVG();">Export SVG</button><br/>
-    <textarea id="svg_preview" rows="7" cols="55"></textarea>
-</div>
-
-
-</p>
 </body>
 </html>

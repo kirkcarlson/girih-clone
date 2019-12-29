@@ -4,11 +4,16 @@
  **/
 
 body {
+   background-color: #f8f8f8;
    font-family: Monospace;
    font-size: 10pt;
-   background-color: #f8f8f8;
 }
-
+html,body{
+    height:100%;
+    margin:0;
+    position:absolute;
+    width:100%;
+}
 button {
    font-family: Monospace;
    font-size: 10pt;
@@ -27,12 +32,12 @@ button {
     bottom: 26px;
     color: #fff;
     content: attr(title);
+    font-size: 10pt;
     left: 20%;
     padding: 5px 15px;
     position: absolute;
-    z-index: 98;
     width: 220px;
-    font-size: 10pt;
+    z-index: 98;
 }
 
 tooltip:hover:before{
@@ -41,8 +46,82 @@ tooltip:hover:before{
     border-width: 6px 6px 0 6px;
     bottom: 20px;
     content: "";
+    font-size: 10pt;
     left: 50%;
     position: absolute;
     z-index: 99;
-    font-size: 10pt;
+}
+
+#container{
+    height:100%;
+    left:0;
+    margin:0;
+    padding:0;
+    position:absolute;
+    top:0;
+    width:100%;
+}
+/* changing the canvas size affects polygon proportions
+#girih_canvas {
+    height:100%;
+    padding:0;
+    margin:0;
+    width:80%;
+}
+*/
+#controlPane {
+    height:100%;
+    margin-right:20pt;
+    overflow:scroll;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width:240pt;
+}
+#directionKeys{
+    height: 65pt;
+    position:relative;
+    width: 65pt;
+}
+#rotationKeys{
+    height: 50pt;
+    position:relative;
+    width: 140pt;
+}
+#zoomKeys{
+    height: 30pt;
+    position:relative;
+    width: 140pt;
+}
+button {
+    font-family:Arial, sans-serif;
+    font-size:1.2em;
+    font-weight:bold;
+    text-align:center;
+}
+#upKey{
+    left:30px;
+    position:absolute;
+    top:0;
+}
+#downKey{
+    bottom:0;
+    left:30px;
+    position:absolute;
+}
+#rightKey{
+    position:absolute;
+    right:0;
+    top:30px;
+}
+#leftKey{
+    left:0;
+    position:absolute;
+    top:30px;
+}
+#rotateRightKey{
+}
+#rotateLeftKey{
+}
+#rotateAll{
 }

@@ -10,7 +10,23 @@ var defaultTextureImage = null;
 
 
 function onLoad() {
-    // Load girih teplate image
+    // adjust the size of the canvas
+    var w = window.innerWidth
+    || document.documentElement.clientWidth
+    || document.body.clientWidth; // variations for cross browser support
+
+    var h = window.innerHeight
+    || document.documentElement.clientHeight
+    || document.body.clientHeight; // variations for cross browser support 
+
+    var controlPaneWidth = document.getElementById("controlPane").clientWidth
+    var girihCanvas = document.getElementById("girih_canvas")
+    console.log("changing canvas to "+ (w-controlPaneWidth + "x" + h + "px"));
+    //girihCanvas.width = (w - controlPaneWidth) +"px"
+    //girihCanvas.height = h +"px"
+
+
+    // Load girih template image
     defaultTextureImage = new Image();
     
     defaultTextureImage.onload = function() {
@@ -72,6 +88,7 @@ function _angle2constant( angle ) {
 }
 
 function _makeTest_Decagon_BowTie( tileSize ) {
+console.log("_makeTest_Decagon_BowTie");
     // Make a test decagon
     var deca = new IKRS.Tile.Decagon( tileSize, 
 				      new IKRS.Point2(300,300),  // position
@@ -103,6 +120,7 @@ function _makeTest_Decagon_BowTie( tileSize ) {
 }
 
 function _makeTest_Pentagon( tileSize ) {
+console.log("_makeTest_Pentagon");
     // Make a test pentagon
     var penta = new IKRS.Tile.Pentagon( tileSize,
 					new IKRS.Point2(479, 52),   // position
@@ -112,6 +130,7 @@ function _makeTest_Pentagon( tileSize ) {
 }
 
 function _makeTest_IrregularHexagon( tileSize ) {
+console.log("_makeTest_Hextagon");
     // Make a test pentagon
     var hexa = new IKRS.Tile.IrregularHexagon( tileSize,
 						new IKRS.Point2(151.577, -33.4546 ), //161.1, -32.2),   // position
@@ -121,6 +140,7 @@ function _makeTest_IrregularHexagon( tileSize ) {
 }
 
 function _makeTest_Rhombus( tileSize ) {
+console.log("_makeTest_Rhombus");
     // Make a test pentagon
     var rhomb = new IKRS.Tile.Rhombus( tileSize,
 					new IKRS.Point2(18.2, 328),   // position
@@ -251,6 +271,10 @@ function exportSVG() {
 				       );
 				      
     
-    document.getElementById( "svg_preview" ).innerHTML = svg;
-
+    downloadFilename = document.getElementById( "downloadFilename");
+    saveAs(
+        new Blob([svg], {type : "text/svg"}),
+        (downloadFilename.value || downloadFilename.placeholder) + ".svg"
+    );
+    return false;
 }
