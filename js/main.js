@@ -273,7 +273,7 @@ function exportSVG() {
     
     downloadFilename = document.getElementById( "downloadFilename");
     saveAs(
-        new Blob([svg], {type : "text/svg"}),
+        new Blob([svg], {type : "image/svg+xml"}),
         (downloadFilename.value || downloadFilename.placeholder) + ".svg"
     );
     return false;
