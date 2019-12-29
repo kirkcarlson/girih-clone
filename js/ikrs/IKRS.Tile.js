@@ -285,9 +285,9 @@ IKRS.Tile.prototype._polygonToSVG = function( polygon,
 	vert = this._translateVertex( polygon.getVertexAt(i) ); // getTranslatedVertex(i);
 	if( i > 0 )
 	    buffer.push( " " );
-	buffer.push( vert.x );
+	buffer.push( IKRS.Girih.round(vert.x, IKRS.Girih.SVG_PRECISION ));
 	buffer.push( "," );
-	buffer.push( vert.y );
+	buffer.push( IKRS.Girih.round(vert.y, IKRS.Girih.SVG_PRECISION ));
 
         boundingBox.evaluatePoint( vert.x, vert.y) // important to use translated vertices
     }
@@ -295,7 +295,7 @@ IKRS.Tile.prototype._polygonToSVG = function( polygon,
 
     buffer.push( "\"" );
 
-    if( typeof polygonStyle != "undefined" ) {
+    if( typeof polygonStyle != "undefined" && polygonStyle != "") {
 	buffer.push( " style=\"" );
 	buffer.push( polygonStyle );
 	buffer.push( "\"" );

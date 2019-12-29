@@ -471,7 +471,7 @@ IKRS.Girih.round = function( n, digits) {
     return Math.round( n * magnitude) / magnitude
 }
 
-const svgPrecision = 3;
+IKRS.Girih.SVG_PRECISION = 3;
 const svgBackground = "";
 const fontStyle = "font:10pt normal Helvetica, Ariel, sans-serif;";
 
@@ -503,7 +503,7 @@ IKRS.Girih.prototype.toSVG = function( options,
     options.indent += "    ";
     for( var i = 0; i < this.tiles.length; i++ ) {
         var boundingBox = new IKRS.BoundingBox3()
-        this.tiles[i].toSVG( options, polygonStyle, buffer, boundingBox );
+        this.tiles[i].toSVG( options, "", buffer, boundingBox );
 
         highWater.evaluatePoint(boundingBox)
     }
@@ -511,10 +511,9 @@ IKRS.Girih.prototype.toSVG = function( options,
     options.indent = oldIndent;
 
 
-var preamble = `
-<svg id="girih-svg" xmlns="http://www.w3.org/2000/svg" version="1.1"
-    height="` + IKRS.Girih.round( highWater.getHeight(), svgPrecision) + `"
-    width="` + IKRS.Girih.round( highWater.getWidth(), svgPrecision) + `">
+var preamble = `<svg id="girih-svg" xmlns="http://www.w3.org/2000/svg" version="1.1"
+    height="` + IKRS.Girih.round( highWater.getHeight(), IKRS.Girih.SVG_PRECISION) + `"
+    width="` + IKRS.Girih.round( highWater.getWidth(), IKRS.Girih.SVG_PRECISION) + `">
 <style>
 path {
     fill:none;
@@ -530,8 +529,8 @@ text {
 </style>
 
 <g transform="matrix(1 0 0 1 ` +
-    IKRS.Girih.round( -highWater.getXMin(), svgPrecision) + ` ` +
-    IKRS.Girih.round( -highWater.getYMin(), svgPrecision) + `)">
+    IKRS.Girih.round( -highWater.getXMin(), IKRS.Girih.SVG_PRECISION) + ` ` +
+    IKRS.Girih.round( -highWater.getYMin(), IKRS.Girih.SVG_PRECISION) + `)">
 `
 trailer = `
 </g>
@@ -539,8 +538,9 @@ trailer = `
 /* for any runtime JavaScript to control or animate the girih */
 /* This must be at the end of the file to execute after the girih DOM is built*/
 </script>
-</svg>
-`
+</svg>`
+
+    // put the pieces together
     buffer.unshift( preamble)
     buffer.push( trailer)
     return buffer
