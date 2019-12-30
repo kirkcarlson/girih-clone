@@ -41,6 +41,9 @@ Changelog
 [2013-12-15]
  * Added narrow Penrose rhombus tile (not part of girihs).
 
+[2019-12-29]
+* Fixed SVG save function.
+* made control pane narrower
 
 
 Thanks to
