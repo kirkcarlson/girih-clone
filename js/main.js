@@ -4,7 +4,6 @@
  * @version 1.0.0
  **/
 
-var girih = new IKRS.Girih();
 var girihCanvasHandler = null;
 var defaultTextureImage = null;
 
@@ -265,7 +264,6 @@ window.addEventListener( "load", onLoad );
 
 
 function exportSVG() {
-
     var svg = girihCanvasHandler.getSVG( { indent: "" }, // options
 					 null            // style
 				       );
@@ -273,14 +271,13 @@ function exportSVG() {
     
     downloadFilename = document.getElementById( "downloadFilename");
     saveAs(
-        new Blob([svg], {type : "image/svg+xml"}),
-        (downloadFilename.value || downloadFilename.placeholder) + ".svg"
+	new Blob([svg], {type : "image/svg+xml"}),
+	(downloadFilename.value || downloadFilename.placeholder) + ".svg"
     );
     return false;
 }
 
 function exportTiles() {
-/*
     var tilesJSON = girihCanvasHandler.girih.getTilesJSON()
 
     downloadFilename = document.getElementById( "downloadFilename");
@@ -288,9 +285,7 @@ function exportTiles() {
         new Blob([tilesJSON], {type : "application/json"}),
         (downloadFilename.value || downloadFilename.placeholder) + ".json"
     );
-*/
     console.log ("exportTiles fired!");
-    findFunctions("girihCanvasHandler.girih.tiles", girihCanvasHandler.girih.tiles, 0)
     return false;
 }
 
@@ -314,29 +309,17 @@ class ObjectCounter {
 
 
 function importTiles(e) {
-    console.log( "importTiles fired!")
     var file = e.target.files[0];
     if (!file) {
-        console.log( "importTiles bad file!")
-        return;
+	console.log( "importTiles bad file!")
+	return;
     }
     var reader = new FileReader();
     reader.onload = function(e) {
-        console.log( "importTiles reader.onload fired!")
-        var count = new ObjectCounter;
-        findFunctions( "girihCanvasHandler", girihCanvasHandler.girih, count)
-        var contents = e.target.result;
-        //girihCanvasHandler.girih.setTilesJSON( contents);
-        var tiles = JSON.parse( contents)
-        girihCanvasHandler.girih = new IKRS.Girih // not sure if other parameters are lost by doing this, but want to clear girihCanvasHandler.girih.tiles.
-	redrawGirih(); // just to clear the screen?
-        console.log("before.setTilesJSON tiles.length:" + girihCanvasHandler.girih.tiles.length);
-        loadGirih ( tiles)
-        console.log("after.setTilesJSON tiles.length:" + girihCanvasHandler.girih.tiles.length);
-        var count = new ObjectCounter;
-        findFunctions( "girihCanvasHandler", girihCanvasHandler.girih, count)
+	var contents = e.target.result;
+	girihCanvasHandler.girih = new IKRS.Girih // not sure if other parameters are lost by doing this, but want to clear girihCanvasHandler.girih.tiles.
+	girihCanvasHandler.girih.setTilesJSON( contents);
 	redrawGirih();
-        console.log( "importTiles reader.onload exit")
     };
     reader.readAsText(file);
 }
@@ -362,48 +345,6 @@ function findStructure ( obj, limit) {
 }
 */
 
-function loadGirih ( tiles) {
-
-    for (var i=0; i< tiles.length; i++) {
-        var tileType = tiles [i].tileType;
-        var size =     tiles [i].size;
-        var position = new IKRS.Point2(tiles[i].position.x,tiles[i].position.y);
-        var angle =    tiles [i].angle;
-        var tile = undefined;
-        switch (tileType){
-        case (IKRS.Girih.TILE_TYPE_DECAGON):
-            console.log("Decagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
-            tile = new IKRS.Tile.Decagon( size, position, angle)
-            break;
-        case (IKRS.Girih.TILE_TYPE_IRREGULAR_HEXAGON):
-            console.log("IrregularHexagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
-            tile = new IKRS.Tile.IrregularHexagon( size, position, angle)
-            break;
-        case (IKRS.Girih.TILE_TYPE_PENTAGON):
-            console.log("Pentagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
-            tile = new IKRS.Tile.Pentagon( size, position, angle)
-            break;
-        case (IKRS.Girih.TILE_TYPE_RHOMBUS):
-            console.log("Rhombus( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
-            tile = new IKRS.Tile.Rhombus( size, position, angle)
-            break;
-        case (IKRS.Girih.TILE_TYPE_PENROSE_RHOMBUS):
-            console.log("Penrose Rhombus( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
-            tile = new IKRS.Tile.PenroseRhombus( size, position, angle)
-            break;
-        case (IKRS.Girih.TILE_TYPE_BOW_TIE):
-            console.log("Bow Tie( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
-            tile = new IKRS.Tile.BowTie( size, position, angle)
-            break;
-        default:
-            console.log("unexpected tile type")
-            break;
-        }
-        if (tile !== undefined) {
-	    girihCanvasHandler.addTile( tile );
-        }
-    }
-}
 
 
 //function used in debugging and exploring objects
@@ -445,6 +386,5 @@ function findFunctions( basename, obj, count) {
 };
 
 window.onload = function(){
-    console.log( "window.onload fired!");
     document.getElementById("importButton").addEventListener('change', importTiles, false);
 };

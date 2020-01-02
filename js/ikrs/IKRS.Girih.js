@@ -16,20 +16,88 @@ IKRS.Girih = function() {
 };
 
 IKRS.Girih.prototype.addTile = function( tile ) {
-    console.log("addTile len:" + this.tiles.length);
     this.tiles.push( tile );
 };
 
+function minimizeTiles ( tiles) {
+    // returns an object that is the essence of the passed tile object
+    // returns an array of mimimized file objects that is the essence of the passed tile object
+
+    obj = []
+    // for each tile
+    for (i = 0; i<tiles.length; i++) {
+        // get the essense of the tile position
+        var tileType = tiles [i].tileType;
+        var size =     tiles [i].size;
+        var x =        tiles [i].position.x;
+        var y =        tiles [i].position.y;
+        var angle =    tiles [i].angle;
+
+        obj.push ({ "tileType": tileType,
+                    "size": size,
+                    "x": x,
+                    "y": y,
+                    "angle": angle
+                  });
+    }
+    return obj
+}
+
 IKRS.Girih.prototype.getTilesJSON = function() {
-    return JSON.stringify( this.tiles, "", 4);
+    // returns json for the minimal information about tiles
+    return JSON.stringify( minimizeTiles( this.tiles));
 };
 
-IKRS.Girih.prototype.setTilesJSON = function(file) {
-    console.log("entry into .setTilesJSON()")
-    this.tiles = JSON.parse(file)
-    console.log("exit from .setTilesJSON()")
-    return;
-};
+IKRS.Girih.prototype.setTilesJSON = function(jsonFile) {
+    // file is a json file with minimal information about tiles
+
+    var tiles = JSON.parse (jsonFile); // expected to be an array of tile objects
+    if ( !Array.isArray( tiles)) {
+    }
+    for (var i=0; i < tiles.length; i++) {
+	var tileType = tiles [i].tileType;
+	var size =     tiles [i].size;
+	var position = new IKRS.Point2( tiles[i].x, tiles[i].y); // fills out point methods
+	var angle =    tiles [i].angle;
+	var tile = undefined;
+	if (tileType === undefined) {
+	    console.log( "JSON file format not specifying tile type")
+	    return
+	}
+	switch (tileType) {
+	case (IKRS.Girih.TILE_TYPE_DECAGON):
+	    //console.log("Decagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+	    tile = new IKRS.Tile.Decagon( size, position, angle) // fills polygon methods
+	    break;
+	case (IKRS.Girih.TILE_TYPE_IRREGULAR_HEXAGON):
+	    //console.log("IrregularHexagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+	    tile = new IKRS.Tile.IrregularHexagon( size, position, angle) // fills polygon methods
+	    break;
+	case (IKRS.Girih.TILE_TYPE_PENTAGON):
+	    //console.log("Pentagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+	    tile = new IKRS.Tile.Pentagon( size, position, angle) // fills polygon methods
+	    break;
+	case (IKRS.Girih.TILE_TYPE_RHOMBUS):
+	    //console.log("Rhombus( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+	    tile = new IKRS.Tile.Rhombus( size, position, angle) // fills polygon methods
+	    break;
+	case (IKRS.Girih.TILE_TYPE_PENROSE_RHOMBUS):
+	    //console.log("Penrose Rhombus( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+	    tile = new IKRS.Tile.PenroseRhombus( size, position, angle) // fills polygon methods
+	    break;
+	case (IKRS.Girih.TILE_TYPE_BOW_TIE):
+	    //console.log("Bow Tie( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+	    tile = new IKRS.Tile.BowTie( size, position, angle) // fills polygon methods
+	    break;
+	default:
+	    console.log("unexpected tile type")
+	    break;
+	}
+	if (tile !== undefined) {
+	    girihCanvasHandler.addTile( tile );
+	}
+    }
+}
 
 IKRS.Girih.deg2rad = function( deg ) {
     return deg * (Math.PI/180.0);
