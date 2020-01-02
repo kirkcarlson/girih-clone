@@ -84,12 +84,18 @@ Press [e] to save an image file."></canvas>
 
     <br/>
     <br/>
-    [pan]
-    <div id="directionKeys">
-      <button id="upKey" onclick="moveUp()";">&uarr;</button>
-      <button id="downKey" onclick="moveDown()";">&darr;</button>
-      <button id="rightKey" onclick="moveRight()";">&rarr;</button>
-      <button id="leftKey" onclick="moveLeft()";">&larr;</button>
+    [pan and zoom]
+    <div id="panAndZoom">
+      <div id="directionKeys">
+        <button id="upKey" onclick="moveUp()";">&uarr;</button>
+        <button id="downKey" onclick="moveDown()";">&darr;</button>
+        <button id="rightKey" onclick="moveRight()";">&rarr;</button>
+        <button id="leftKey" onclick="moveLeft()";">&larr;</button>
+      </div>
+      <div id="zoomKeys">
+        <button id="zoomInKey" onclick="increaseZoom();">+Zoom</button>
+        <button id="zoomOutKey" onclick="decreaseZoom();">-Zoom</button>
+      </div>
     </div>
     <br/>
     [rotate]
@@ -103,14 +109,10 @@ Press [e] to save an image file."></canvas>
       </form>
     </div>
     <br/>
-    [zoom]
-    <div id="zoomKeys">
-      <button id="zoomInKey" onclick="increaseZoom();">+Zoom</button>
-      <button id="zoomOutKey" onclick="decreaseZoom();">-Zoom</button>
-    </div>
-    <br/>
     [Tools]<br/>
-      <button onclick="exportSVG();">Export SVG</button><br/>
+      <span class="fileInput">Load</span><input type="file" id="importButton" />
+      <button id="exportSVGKey"   onclick="exportSVG();return   false">Save SVG</button><br/>
+      <button id="exportTilesKey" onclick="exportTiles();return false">Save</button><br/>
       <input type="text" id="downloadFilename" placeholder="girih">
     <br/>
     <br/>

@@ -16,16 +16,28 @@ IKRS.Girih = function() {
 };
 
 IKRS.Girih.prototype.addTile = function( tile ) {
+    console.log("addTile len:" + this.tiles.length);
     this.tiles.push( tile );
-}
+};
+
+IKRS.Girih.prototype.getTilesJSON = function() {
+    return JSON.stringify( this.tiles, "", 4);
+};
+
+IKRS.Girih.prototype.setTilesJSON = function(file) {
+    console.log("entry into .setTilesJSON()")
+    this.tiles = JSON.parse(file)
+    console.log("exit from .setTilesJSON()")
+    return;
+};
 
 IKRS.Girih.deg2rad = function( deg ) {
     return deg * (Math.PI/180.0);
-}
+};
 
 IKRS.Girih.rad2deg = function( rad ) {
     return (rad * 180.0) / Math.PI
-}
+};
 
 
 // 18.0 * (Math.PI/180.0);

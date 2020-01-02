@@ -52,6 +52,9 @@ tooltip:hover:before{
     z-index: 99;
 }
 
+br{
+    float: clear;
+}
 #container{
     height:100%;
     left:0;
@@ -78,18 +81,25 @@ tooltip:hover:before{
     top: 0;
     width:240pt;
 }
+#panAndZoom{
+    height: 70pt;
+    position:relative;
+    width:100%;
+}
 #directionKeys{
+    position:relative;
+    float: left;
+    height: 65pt;
+    width: 65pt;
+}
+#zoomKeys{
+    float: left;
     height: 65pt;
     position:relative;
-    width: 65pt;
+    width: 70pt;
 }
 #rotationKeys{
     height: 50pt;
-    position:relative;
-    width: 140pt;
-}
-#zoomKeys{
-    height: 30pt;
     position:relative;
     width: 140pt;
 }
@@ -97,7 +107,14 @@ button {
     font-family:Arial, sans-serif;
     font-size:1.2em;
     font-weight:bold;
+    margin: 3pt;
     text-align:center;
+}
+.fileInput{
+    font-family:Arial, sans-serif;
+    font-size:1.2em;
+    font-weight:bold;
+    margin-right:6pt;
 }
 #upKey{
     left:30px;
@@ -124,4 +141,10 @@ button {
 #rotateLeftKey{
 }
 #rotateAll{
+}
+#exportSVGKey {
+    float:left;
+}
+#exportTilesKey {
+    float:left;
 }

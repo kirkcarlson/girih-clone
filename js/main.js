@@ -278,3 +278,173 @@ function exportSVG() {
     );
     return false;
 }
+
+function exportTiles() {
+/*
+    var tilesJSON = girihCanvasHandler.girih.getTilesJSON()
+
+    downloadFilename = document.getElementById( "downloadFilename");
+    saveAs(
+        new Blob([tilesJSON], {type : "application/json"}),
+        (downloadFilename.value || downloadFilename.placeholder) + ".json"
+    );
+*/
+    console.log ("exportTiles fired!");
+    findFunctions("girihCanvasHandler.girih.tiles", girihCanvasHandler.girih.tiles, 0)
+    return false;
+}
+
+class ObjectCounter {
+    arrays;
+    arrayElements;
+    functions;
+    objects;
+    other;
+    all;
+
+    constructor () {
+         this.arrays = 0;
+         this.arrayElements = 0;
+         this.functions = 0;
+         this.objects = 0;
+         this.other = 0;
+         this.all = 0;
+    }
+}
+
+
+function importTiles(e) {
+    console.log( "importTiles fired!")
+    var file = e.target.files[0];
+    if (!file) {
+        console.log( "importTiles bad file!")
+        return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(e) {
+        console.log( "importTiles reader.onload fired!")
+        var count = new ObjectCounter;
+        findFunctions( "girihCanvasHandler", girihCanvasHandler.girih, count)
+        var contents = e.target.result;
+        //girihCanvasHandler.girih.setTilesJSON( contents);
+        var tiles = JSON.parse( contents)
+        girihCanvasHandler.girih = new IKRS.Girih // not sure if other parameters are lost by doing this, but want to clear girihCanvasHandler.girih.tiles.
+	redrawGirih(); // just to clear the screen?
+        console.log("before.setTilesJSON tiles.length:" + girihCanvasHandler.girih.tiles.length);
+        loadGirih ( tiles)
+        console.log("after.setTilesJSON tiles.length:" + girihCanvasHandler.girih.tiles.length);
+        var count = new ObjectCounter;
+        findFunctions( "girihCanvasHandler", girihCanvasHandler.girih, count)
+	redrawGirih();
+        console.log( "importTiles reader.onload exit")
+    };
+    reader.readAsText(file);
+}
+
+/* now the exercise is to walk the saved object to find the base polygons tiles.
+   Create the new base polygon tile (and internal polygons) and add to a new object array
+   see if the created object has similar structure as the original
+function something () {
+    findStructure("", existingGirihObject, 0);
+    break structure of existingGirihObject into a savable object
+    convert saveable object to JSON file
+    convert JSON file to loadedGirihObject
+    converted loadedGirihObject to filledOutGirihObject
+    findStructure("", filledOutGirihObject, 0);
+
+function findStructure ( obj, limit) {
+    for each object in given object
+        findStructure( obj1, limit)
+    for each array in given object
+        sumarize # of elements and structure of first element
+        what is in each element, what is in the overall elements ... min max total
+
+}
+*/
+
+function loadGirih ( tiles) {
+
+    for (var i=0; i< tiles.length; i++) {
+        var tileType = tiles [i].tileType;
+        var size =     tiles [i].size;
+        var position = new IKRS.Point2(tiles[i].position.x,tiles[i].position.y);
+        var angle =    tiles [i].angle;
+        var tile = undefined;
+        switch (tileType){
+        case (IKRS.Girih.TILE_TYPE_DECAGON):
+            console.log("Decagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+            tile = new IKRS.Tile.Decagon( size, position, angle)
+            break;
+        case (IKRS.Girih.TILE_TYPE_IRREGULAR_HEXAGON):
+            console.log("IrregularHexagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+            tile = new IKRS.Tile.IrregularHexagon( size, position, angle)
+            break;
+        case (IKRS.Girih.TILE_TYPE_PENTAGON):
+            console.log("Pentagon( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+            tile = new IKRS.Tile.Pentagon( size, position, angle)
+            break;
+        case (IKRS.Girih.TILE_TYPE_RHOMBUS):
+            console.log("Rhombus( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+            tile = new IKRS.Tile.Rhombus( size, position, angle)
+            break;
+        case (IKRS.Girih.TILE_TYPE_PENROSE_RHOMBUS):
+            console.log("Penrose Rhombus( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+            tile = new IKRS.Tile.PenroseRhombus( size, position, angle)
+            break;
+        case (IKRS.Girih.TILE_TYPE_BOW_TIE):
+            console.log("Bow Tie( size:" + size + " x:" + position.x + " y:" + position.y, " angle:" + angle)
+            tile = new IKRS.Tile.BowTie( size, position, angle)
+            break;
+        default:
+            console.log("unexpected tile type")
+            break;
+        }
+        if (tile !== undefined) {
+	    girihCanvasHandler.addTile( tile );
+        }
+    }
+}
+
+
+//function used in debugging and exploring objects
+// this walks down an object tree and lists the locations of all functions
+// these functions must be replaced when the JSON is loaded....
+function findFunctions( basename, obj, count) {
+    var entryCount = count.all
+    count.all = count.all + 1;
+    if (typeof obj === "object") {
+        if (Array.isArray( obj)) {
+            //console.log( "is an array")
+            count.arrays = count.arrays + 1;
+            for (var i=0; i< obj.length; i++) {
+                //console.log( "findFunctions (" + basename + "[" + i + "]")
+                count = findFunctions ( basename + "[" + i + "]", obj[ i], count)
+                count.arrayElements = count.arrayElements + 1;
+            }
+        } else {
+            //console.log( "is an object")
+            for (var key in obj) {
+                //console.log( "findFunctions (" + basename + "." + key)
+                count = findFunctions( basename + "." + key, obj[ key], count)
+                count.objects = count.objects + 1;
+            }
+        }
+    } else if (typeof obj === "function") {
+        count.functions = count.functions + 1;
+        //console.log( basename +": function")
+    } else {
+        count.other = count.other + 1;
+        //console.log( "is something else: " + typeof obj);
+    }
+    if (entryCount === 0) {
+        console.log( "  processed "+ count.all + " items, arrays:" + count.arrays +
+                " array elements:" + count.arrayElements + " objects:" + count.objects +
+                " functions:" + count.functions + " other:" + count.other)
+    }
+    return count
+};
+
+window.onload = function(){
+    console.log( "window.onload fired!");
+    document.getElementById("importButton").addEventListener('change', importTiles, false);
+};
