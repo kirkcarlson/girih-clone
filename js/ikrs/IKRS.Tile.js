@@ -50,7 +50,8 @@ IKRS.Tile = function( size,
     // The intersection of both sets is empty.
     // Outer tile polygon share at least one (partial) edge with the complete
     // tile polygon (length > 0).
-    this.outerTilePolygons    = [];  
+    this.outerTilePolygons    = [];
+    this.connectors           = [];
     this.imageProperties      = null;
 
     this.tileType             = tileType;

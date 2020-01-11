@@ -11,11 +11,16 @@
     <script src="js/ikrs/IKRS.js" type="text/javascript"></script>
     <script src="js/ikrs/IKRS.Object.js" type="text/javascript"></script>
 
+<!--
+original order in case alphbetical does not work
     <script src="js/ikrs/IKRS.Pair.js" type="text/javascript"></script>
 
     <script src="js/ikrs/IKRS.TileAlign.js" type="text/javascript"></script>
     <script src="js/ikrs/IKRS.Point2.js" type="text/javascript"></script>
     <script src="js/ikrs/IKRS.Line2.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Chain.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Connector.js" type="text/javascript"></script>
+    <script src="js/ikrs/IKRS.Link.js" type="text/javascript"></script>
     <script src="js/ikrs/IKRS.Polygon.js" type="text/javascript"></script>
     <script src="js/ikrs/IKRS.Circle.js" type="text/javascript"></script>
     <script src="js/ikrs/IKRS.BoundingBox2.js" type="text/javascript"></script>
@@ -30,6 +35,30 @@
     <script src="js/ikrs/IKRS.Tile.Octagon.js" type="text/javascript"></script>
     <script src="js/ikrs/IKRS.Girih.js" type="text/javascript"></script>
     <script src="js/ikrs/IKRS.GirihCanvasHandler.js" type="text/javascript"></script>
+-->
+
+    <script src="js/ikrs/IKRS.BoundingBox2.js"></script>
+    <script src="js/ikrs/IKRS.BoundingBox3.js"></script>
+    <script src="js/ikrs/IKRS.Chain.js"></script>
+    <script src="js/ikrs/IKRS.Circle.js"></script>
+    <script src="js/ikrs/IKRS.Connector.js"></script>
+    <script src="js/ikrs/IKRS.GirihCanvasHandler.js"></script>
+    <script src="js/ikrs/IKRS.Line2.js"></script>
+    <script src="js/ikrs/IKRS.Link.js"></script>
+    <script src="js/ikrs/IKRS.Pair.js"></script>
+    <script src="js/ikrs/IKRS.Point2.js"></script>
+    <script src="js/ikrs/IKRS.Polygon.js"></script>
+    <script src="js/ikrs/IKRS.Tile.js"></script>
+    <script src="js/ikrs/IKRS.Tile.BowTie.js"></script>
+    <script src="js/ikrs/IKRS.Tile.Decagon.js"></script>
+    <script src="js/ikrs/IKRS.Tile.IrregularHexagon.js"></script>
+    <script src="js/ikrs/IKRS.Tile.Octagon.js"></script>
+    <script src="js/ikrs/IKRS.Tile.PenroseRhombus.js"></script>
+    <script src="js/ikrs/IKRS.Tile.Pentagon.js"></script>
+    <script src="js/ikrs/IKRS.Tile.Rhombus.js"></script>
+    <script src="js/ikrs/IKRS.TileAlign.js"></script>
+
+    <script src="js/ikrs/IKRS.Girih.js"></script> <--builds data structures, must be last -->
 
     <script src="js/thirdparty/FileSaver.js" language="Javascript" type="text/javascript"></script>
     <script src="js/StringFileExporter.js" language="Javascript" type="text/javascript"></script>
@@ -76,13 +105,10 @@ Press [e] to save an image file."></canvas>
       <br/>
       <br/>
       [Development Settings]<br/>
-      <input type="checkbox" name="outer_random_color_fill" onclick="redrawGirih();" /> Random Color Fill (outer sub polygons)</br>
-      <input type="checkbox" name="inner_random_color_fill" onclick="redrawGirih();" /> Random Color Fill (inner sub polygons)</br>
-      <br/>
-      <br/>
+      <input type="checkbox" name="outer_random_color_fill" onclick="redrawGirih();" />Color Outer Facets Randomly<br/>
+      <input type="checkbox" name="inner_random_color_fill" onclick="redrawGirih();" />Color Inner Facets Randomly<br/>
     </form>
 
-    <br/>
     <br/>
     [pan and zoom]
     <div id="panAndZoom">
@@ -93,8 +119,8 @@ Press [e] to save an image file."></canvas>
         <button id="leftKey" onclick="moveLeft()";">&larr;</button>
       </div>
       <div id="zoomKeys">
-        <button id="zoomInKey" onclick="increaseZoom();">+Zoom</button>
-        <button id="zoomOutKey" onclick="decreaseZoom();">-Zoom</button>
+        <button id="zoomInKey" onclick="increaseZoom();">Zoom +</button>
+        <button id="zoomOutKey" onclick="decreaseZoom();">Zoom -</button>
       </div>
     </div>
     <br/>

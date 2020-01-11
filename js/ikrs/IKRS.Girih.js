@@ -1,7 +1,7 @@
 /**
  * @author Ikaros Kappler
  * @date 2013-11-27
- * @version 1.0.0
+ 
  **/
 
 
@@ -9,9 +9,9 @@ IKRS.Girih = function() {
     
     IKRS.Object.call( this );
     
-    // Add tiles
+    // Add tiles and chains
     this.tiles = [];
-    //this.tiles.push( new IKRS.Tile() );
+    this.chains = [];
 
 };
 
@@ -19,7 +19,11 @@ IKRS.Girih.prototype.addTile = function( tile ) {
     this.tiles.push( tile );
 };
 
-function minimizeTiles ( tiles) {
+IKRS.Girih.prototype.addChain = function( chain ) {
+    this.chains.push( chain );
+};
+
+IKRS.Girih.prototype._minimizeTiles = function ( tiles) {
     // returns an object that is the essence of the passed tile object
     // returns an array of mimimized file objects that is the essence of the passed tile object
 
@@ -45,10 +49,10 @@ function minimizeTiles ( tiles) {
 
 IKRS.Girih.prototype.getTilesJSON = function() {
     // returns json for the minimal information about tiles
-    return JSON.stringify( minimizeTiles( this.tiles));
+    return JSON.stringify( this._minimizeTiles( this.tiles));
 };
 
-IKRS.Girih.prototype.setTilesJSON = function(jsonFile) {
+IKRS.Girih.prototype.setTilesJSON = function( jsonFile) {
     // file is a json file with minimal information about tiles
 
     var tiles = JSON.parse (jsonFile); // expected to be an array of tile objects
@@ -99,6 +103,76 @@ IKRS.Girih.prototype.setTilesJSON = function(jsonFile) {
     }
 }
 
+
+IKRS.Girih.prototype.findAllChains = function() {
+    // for all connectors in the figure
+    var chainNumber = 0;
+    girihCanvasHandler.girih.chains = []; // delete existing chains
+    for (var i=0; i<girihCanvasHandler.girih.tiles.length; i++) {
+	var tileType = girihCanvasHandler.girih.tiles[i].tileType;
+	for( var j=0; j<girihCanvasHandler.girih.tiles[i].connectors.length; j++) {
+	    var tileIndex = i;
+	    var tile = girihCanvasHandler.girih.tiles[ tileIndex]; // (tail)
+	    var connector = tile.connectors[j]; // (tail)
+	    var startLink = new IKRS.Link ( tileIndex, j); // (tail)
+	    // if the connector is not shared
+	    if ( !connector.isShared()) { //starting tail!
+		// for both cw and ccw directions
+		for (var k=0; k<2; k++) {
+		    var CW = [ true, false ] [ k ];
+		    // reset tile and connector because changed within the loop
+		    var tileIndex = i;
+		    var tile = girihCanvasHandler.girih.tiles[ tileIndex]; // (tail)
+		    // verify that connector is not on another chain (tail)
+		    var connector = tile.connectors[j]; // (tail)
+			    if ( !connector.isOnChain( CW)) {
+			// create a new chain
+			var chain = new IKRS.Chain( chainNumber);
+			// while connector on traversed link is shared and not looping
+			connector.setChainID( CW, chainNumber);
+console.log( "set first ChainID connector:" + tileIndex + "," + connector.connectorIndex + " direction:" + (CW?"CW":"CCW") + " chain:"+chainNumber)
+			connector = tile.connectors[ connector.getInternalLink( CW, tile.tileType)]; // (head)
+			while (connector.isShared() && !connector.isOnChain( !CW)) { // also tests looping
+			    // add link to chain
+			    connector.setChainID( !CW, chainNumber);
+console.log( "set loop end ChainID connector:" + tileIndex + "," + connector.connectorIndex + " direction:" + (!CW?"CW":"CCW") + " chain:"+chainNumber)
+			    var link = new IKRS.Link( tileIndex, connector.headLink( CW, tile.tileType));
+				    chain.addLink( link);
+console.log ("addLink chain:"+ chainNumber + " link:" + link.toString())
+			    // move to the adjacent polygon and connector
+			    tileIndex = connector.sharedConnectorLink.polygonIndex;
+			    tile = girihCanvasHandler.girih.tiles[ tileIndex]
+			    connector = tile.connectors[ connector.sharedConnectorLink.connectorIndex]; // (tail)
+			    CW = !CW // flip transverse direction every polygon
+			    // verify that connector is not on another chain (tail)
+			    if (connector.isOnChain( CW)) {
+				throw 'connector has chain' + connector.toString() + (CW?" CW":" CCW");
+			    }
+			    connector.setChainID( CW, chainNumber);
+console.log( "set loop begin ChainID connector:" + tileIndex + "," + connector.connectorIndex + " direction:" + (CW?"CW":"CCW") + " chain:"+chainNumber)
+			    connector = tile.connectors[ connector.getInternalLink( CW, tile.tileType)]; // (head)
+			}
+			if (!connector.isShared()) { // last link of chain..
+			    var link = new IKRS.Link( tileIndex, connector.headLink( CW, tile.tileType));
+			    chain.addLink( link);
+console.log ("addLink chain:"+ chainNumber + " link:" + link.toString())
+			    connector.setChainID( !CW, chainNumber);
+console.log( "set last ChainID connector:" + tileIndex + "," + connector.connectorIndex + " direction:" + (!CW?"CW":"CCW") + " chain:"+chainNumber)
+			}
+			if (startLink.isEqual( link)) {
+			    chain.markLoop();
+console.log ("looping chain:"+ chainNumber)
+			}
+			girihCanvasHandler.girih.addChain( chain);
+			chainNumber = chainNumber + 1;
+		    }
+		} //done walking in either direction
+	    } //else connnector shared
+	}
+    }
+}
+
+
 IKRS.Girih.deg2rad = function( deg ) {
     return deg * (Math.PI/180.0);
 };
@@ -111,7 +185,7 @@ IKRS.Girih.rad2deg = function( rad ) {
 // 18.0 * (Math.PI/180.0);
 IKRS.Girih.MINIMAL_ANGLE = IKRS.Girih.deg2rad(18.0); 
 
-// IKRS.Girih.EPSILON       = 1.0e-6;
+IKRS.Girih.EPSILON       = 1.0e-6;
 
 
 IKRS.Girih.TILE_TYPE_UNKNOWN            = -1;

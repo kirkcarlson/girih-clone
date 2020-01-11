@@ -181,5 +181,4 @@ IKRS.Tile.PenroseRhombus.prototype.locateAdjacentEdge      = IKRS.Tile.prototype
 IKRS.Tile.PenroseRhombus.prototype.getVertexAt             = IKRS.Tile.prototype.getVertexAt;
 IKRS.Tile.PenroseRhombus.prototype.toSVG                   = IKRS.Tile.prototype.toSVG;
 
-IKRS.Tile.Rhombus.prototype.constructor                    = IKRS.Tile.Rhombus;
-
+IKRS.Tile.PenroseRhombus.prototype.constructor             = IKRS.Tile.PenroseRhombus;

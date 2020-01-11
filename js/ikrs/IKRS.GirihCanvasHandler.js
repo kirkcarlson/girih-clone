@@ -440,12 +440,11 @@ IKRS.GirihCanvasHandler.prototype._locateTileAtPoint = function( point ) {
     for( var i = this.girih.tiles.length-1; i >= 0; i-- ) {
 	
 	// Ignore Penrose-Tile?
-console.log("_locateTileAtPoint i:" + i + " tiles[i]:" + typeof this.girih.tiles[i]);
-if( typeof this.girih.tiles[i].tileType !== "undefined") console.log(".filetype:" + this.girih.tiles[i].filetype);
+//if( typeof this.girih.tiles[i].tileType !== "undefined") console.log(".tileType:" + this.girih.tiles[i].tileType);
 	if( this.girih.tiles[i].tileType == IKRS.Girih.TILE_TYPE_PENROSE_RHOMBUS && !this.getProperties().allowPenroseTile ) 
 	    continue;
 
-if( typeof this.girih.tiles[i].containsPoint(point) !== "undefined") console.log(".containsPoint:" + this.girih.tiles[i].containsPoint(point));
+//if( typeof this.girih.tiles[i].containsPoint(point) !== "undefined") console.log(".containsPoint:" + this.girih.tiles[i].containsPoint(point));
 	if( this.girih.tiles[i].containsPoint(point) )
 	    return i;
 	

@@ -84,17 +84,17 @@ br{
 #panAndZoom{
     height: 70pt;
     position:relative;
-    width:100%;
+    width: 100%;
 }
 #directionKeys{
     position:relative;
     float: left;
-    height: 65pt;
-    width: 65pt;
+    height: 70pt;
+    width: 70pt;
 }
 #zoomKeys{
     float: left;
-    height: 65pt;
+    height: 70pt;
     position:relative;
     width: 70pt;
 }
